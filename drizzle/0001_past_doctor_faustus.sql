@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `idx_commands_one_pending` ON `commands` (1) WHERE "commands"."status" IN ('REQUESTED','UNCERTAIN');

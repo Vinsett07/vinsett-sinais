@@ -1,0 +1,24 @@
+name: Validar VINSETT Sinais
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: vinsett-validation
+  cancel-in-progress: true
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Instalar dependências travadas
+        run: npm run install:ci
+      - name: Validar tipos
+        run: npm run typecheck
+      - name: Testar regras e integração
+        run: npm test

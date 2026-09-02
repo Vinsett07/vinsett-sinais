@@ -1,0 +1,37 @@
+✔ ingestão autenticada, idempotência, identidade e ausência de segredos públicos (25.909309ms)
+✔ assinatura inválida, conteúdo adulterado, janela expirada e excesso de tamanho são rejeitados (5.710619ms)
+✔ API pública não grava e cabeçalhos forjados não autorizam administração (1.189732ms)
+✔ 3 ativos, 2 direções e todos os resultados; filtros combinados e amostra completa (15.708428ms)
+✔ versões antigas não revertem resultado; dado imutável e revisão conflitante não são aceitos (6.549756ms)
+✔ estatísticas excluem teste, cancelamento, publicação incerta e apuração inconclusiva (5.505472ms)
+✔ publicação após entrada vira inconclusiva; vela e fonte inválidas são rejeitadas (5.47008ms)
+✔ sem amostra e fuso Manaus não produzem taxa nem datas inventadas (2.980792ms)
+✔ comando começa solicitado, exige admin/origem, é idempotente e só muda com confirmação autenticada (3.48678ms)
+✔ transação falha sem gravar recibo ou parte do evento (2.284491ms)
+✔ limite de ingestão e links Telegram não autorizados (2.388696ms)
+✔ voltar aceita somente origens internas de acompanhamento (1.262871ms)
+✔ janela usa horário fixo, respeita 8 segundos e começa em acompanhamento (0.683053ms)
+✔ status considera motor, manutenção, pausa, falha e atraso; página acessível não basta (0.201883ms)
+✔ backup do código V5 preserva SHA-256 e compila sem execução externa (3.17235ms)
+✔ funções originais mantêm SMA inicial da EMA, médias simples e score limite (2.969375ms)
+✔ séries originais rejeitam lacunas, duplicatas, volume inválido, vela futura e menos de 60 velas (3.099951ms)
+✔ apuração original usa vela exata, respeita BUY/SELL/EMPATE e fim+5s (1.912693ms)
+✔ pausa original mantém apuração e não inicia novas análises (2.298291ms)
+✔ projeção é aceita pelo contrato, preserva o sinal e exclui chat privado e token (5.059384ms)
+✔ conector persiste evento em falha, retoma o mesmo corpo após reinício e não modifica filas (5.993033ms)
+✔ instalação do conector é idempotente e não remove outros acionadores (1.161809ms)
+✔ comandos não executam duas vezes e retomada em manutenção é rejeitada (1.877981ms)
+✔ fallback original substitui o pacote completo e falha se as duas fontes forem inválidas (1.898573ms)
+✔ retomada revalida manutenção dentro do lock e não muda acionadores (1.421839ms)
+✔ emits the catalog's animation and scrolling utilities (27.208055ms)
+✔ forwards progress semantics to the primitive (393.385457ms)
+✔ emits chart themes for the starter's media dark mode (415.861473ms)
+✔ renders sidebar skeletons deterministically (266.415429ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1415.071737
