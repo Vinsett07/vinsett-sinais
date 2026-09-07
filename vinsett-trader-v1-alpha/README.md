@@ -16,6 +16,7 @@ Stable rollback point: **Core 0.4**
 - Settlement: one M1 candle
 - Outcomes: WIN, LOSS, DRAW
 - Database: Google Sheets `Trades`
+- Signal-event log: `SignalEvents` (separate from the Core 0.4 `Signals` sheet to preserve old history)
 - Reports: weekly and monthly WIN%, LOSS%, DRAW and per-asset breakdown
 - Notifications: trend ready, entry confirmed, trade result, performance report
 - Execution: simulation only; no automatic orders
@@ -62,7 +63,7 @@ VINSETT Trader V1.0 Alpha — Core 0.5
 │
 ├── Database
 │   ├── Analyses
-│   ├── Signals
+│   ├── SignalEvents
 │   ├── Trades
 │   ├── Notifications
 │   └── Reports
@@ -96,6 +97,7 @@ VINSETT Trader V1.0 Alpha — Core 0.5
 - `installAutomationVinsettV1`
 - `removeAutomationVinsettV1`
 - `statusVinsettTraderV1`
+- `resetVinsettLocksV1` (preserves pending trades)
 
 ## Source
 
