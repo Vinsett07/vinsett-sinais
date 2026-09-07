@@ -77,7 +77,7 @@ function setupVinsettTraderV1() {
     'M1_Direction','M1_ADX','M1_+DI','M1_-DI','M1_EMA9','M1_EMA21','M1_EMA50','M1_VWAP',
     'M1_Candle_Start_UTC','Reason'
   ]);
-  ensureSheet_(spreadsheet, 'Signals', [
+  ensureSheet_(spreadsheet, 'SignalEvents', [
     'Timestamp_Manaus','Trade_ID','Symbol','Direction','Technical_Score','Signal_Price',
     'Entry_Candle_UTC','M15_ADX','M5_ADX','M1_ADX','Reason'
   ]);
@@ -388,7 +388,7 @@ function findTradeRow_(sheet,tradeId) {
 }
 
 function logSignal_(trade) {
-  getSpreadsheet_().getSheetByName('Signals').appendRow([
+  getSpreadsheet_().getSheetByName('SignalEvents').appendRow([
     trade.createdAtManaus,trade.tradeId,trade.symbol,trade.direction,trade.technicalScore,trade.signalPrice,
     new Date(trade.entryCandleT*1000).toISOString(),trade.m15Adx,trade.m5Adx,trade.m1Adx,trade.reason
   ]);
@@ -514,7 +514,7 @@ function updateStructuralReset_(symbol,currentM5Direction,m5Metrics) {
 
 function lockStructure_(symbol,direction,candleTimestamp){writeJsonProperty_(lockKey_(symbol),{direction:direction,candleTimestamp:candleTimestamp,createdAt:Date.now()});}
 function isLocked_(symbol,direction){const lock=readJsonProperty_(lockKey_(symbol));return !!(lock&&lock.direction===direction);}
-function resetVinsettLocksV1(){VINSETT.SYMBOLS.forEach(function(symbol){deleteProperty_(lockKey_(symbol));deleteProperty_(pendingKey_(symbol));deleteProperty_(stateKey_(symbol));});logDiagnostic_('MANUAL_RESET','','States, locks and pending trades were cleared manually.');return {ok:true};}
+function resetVinsettLocksV1(){VINSETT.SYMBOLS.forEach(function(symbol){deleteProperty_(lockKey_(symbol));const state=readJsonProperty_(stateKey_(symbol));if(state&&state.state!=='PENDING_RESULT'&&state.state!=='SIGNAL_SENT'){state.state='NEUTRAL';state.direction='NO_TRADE';state.updatedAt=Date.now();state.reason='Bloqueio removido manualmente; aguardando novo market scan.';writeJsonProperty_(stateKey_(symbol),state);}});logDiagnostic_('MANUAL_LOCK_RESET','','Structural locks were cleared. Pending trades were preserved for settlement.');return {ok:true,pendingTradesPreserved:true};}
 function stateKey_(symbol){return VINSETT.PROP_PREFIX+'STATE_'+sanitizeSymbol_(symbol);}
 function pendingKey_(symbol){return VINSETT.PROP_PREFIX+'PENDING_'+sanitizeSymbol_(symbol);}
 function lockKey_(symbol){return VINSETT.PROP_PREFIX+'LOCK_'+sanitizeSymbol_(symbol);}
